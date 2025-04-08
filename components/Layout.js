@@ -12,6 +12,17 @@ export default function Layout({ children }) {
       {!isHomePage && <Header />}
       {children}
       <Footer />
+      <style jsx global>{`
+        @media (max-width: 440px) {
+          html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+          }
+        }
+      `}</style>
       <style jsx>{`
         .page-container {
           display: flex;
@@ -38,6 +49,15 @@ export default function Layout({ children }) {
         .page-container > :global(*) {
           position: relative;
           z-index: 1;
+        }
+
+        @media (max-width: 440px) {
+          .page-container {
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+          }
         }
       `}</style>
     </div>

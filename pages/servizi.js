@@ -5,56 +5,58 @@ import Layout from '../components/Layout'
 export default function Servizi() {
   return (
     <Layout>
-      <div className="servizi-container">
-        <div className="content-wrapper">
-          <div className="left-section">
-            <div className="section-content">
-              <h2>PRIMA VISITA</h2>
-              <p>
-                La prima visita è un momento fondamentale per conoscerci e iniziare
-                insieme il tuo percorso verso il benessere. Durante questo incontro, della durata di
-                circa un'ora, raccoglierò informazioni dettagliate sulle tue abitudini alimentari, il tuo
-                stile di vita, eventuali patologie e la tua storia clinica.
-              </p>
-              <p>
-                Effettuerò inoltre misurazioni antropometriche (peso, altezza, circonferenze, plicometria) 
-                per avere un quadro completo della tua situazione. L'obiettivo è creare un piano nutrizionale
-                personalizzato, basato sulle tue esigenze e obiettivi, che ti permetta di raggiungere e
-                mantenere uno stato di salute ottimale.
-              </p>
-              <p>
-                Sarà un colloquio aperto e accogliente, dove potrai sentirti a tuo agio nel condividere 
-                le tue esperienze e aspettative.
-              </p>
-              <p className="pricing">
-                Tariffa prima visita: 100€
-              </p>
-              <Link href="/contatti" className="service-link">
-                Contattami →
-              </Link>
+      <main>
+        <div className="servizi-container">
+          <div className="content-wrapper">
+            <div className="left-section">
+              <div className="section-content">
+                <h2>PRIMA VISITA</h2>
+                <p>
+                  La prima visita è un momento fondamentale per conoscerci e iniziare
+                  insieme il tuo percorso verso il benessere. Durante questo incontro, della durata di
+                  circa un'ora, raccoglierò informazioni dettagliate sulle tue abitudini alimentari, il tuo
+                  stile di vita, eventuali patologie e la tua storia clinica.
+                </p>
+                <p>
+                  Effettuerò inoltre misurazioni antropometriche (peso, altezza, circonferenze, plicometria) 
+                  per avere un quadro completo della tua situazione. L'obiettivo è creare un piano nutrizionale
+                  personalizzato, basato sulle tue esigenze e obiettivi, che ti permetta di raggiungere e
+                  mantenere uno stato di salute ottimale.
+                </p>
+                <p>
+                  Sarà un colloquio aperto e accogliente, dove potrai sentirti a tuo agio nel condividere 
+                  le tue esperienze e aspettative.
+                </p>
+                <p className="pricing">
+                  Tariffa prima visita: 100€
+                </p>
+                <Link href="/contatti" className="service-link">
+                  Contattami →
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="right-section">
-            <div className="section-content">
-              <h2>VISITA DI CONTROLLO</h2>
-              <p>
-                Le visite di controllo sono fondamentali per monitorare i progressi, valutare l'efficacia del
-                piano nutrizionale e apportare eventuali modifiche necessarie. Durante queste visite,
-                che hanno una durata di circa 30 minuti, discuteremo dei risultati ottenuti, delle
-                eventuali difficoltà incontrate e delle tue sensazioni.
-              </p>
-              <p>
-                Effettuerò nuovamente le misurazioni antropometriche per confrontarle con quelle iniziali 
-                e valuteremo insieme i cambiamenti avvenuti. Sarà un momento per rafforzare la motivazione, 
-                rispondere alle tue domande e fornirti ulteriori consigli e strategie per raggiungere i tuoi 
-                obiettivi di benessere.
-              </p>
-              <p className="pricing">
-                Tariffa visita di controllo: 50€
-              </p>
-              <Link href="/contatti" className="service-link">
-                Contattami →
-              </Link>
+            <div className="right-section">
+              <div className="section-content">
+                <h2>VISITA DI CONTROLLO</h2>
+                <p>
+                  Le visite di controllo sono fondamentali per monitorare i progressi, valutare l'efficacia del
+                  piano nutrizionale e apportare eventuali modifiche necessarie. Durante queste visite,
+                  che hanno una durata di circa 30 minuti, discuteremo dei risultati ottenuti, delle
+                  eventuali difficoltà incontrate e delle tue sensazioni.
+                </p>
+                <p>
+                  Effettuerò nuovamente le misurazioni antropometriche per confrontarle con quelle iniziali 
+                  e valuteremo insieme i cambiamenti avvenuti. Sarà un momento per rafforzare la motivazione, 
+                  rispondere alle tue domande e fornirti ulteriori consigli e strategie per raggiungere i tuoi 
+                  obiettivi di benessere.
+                </p>
+                <p className="pricing">
+                  Tariffa visita di controllo: 50€
+                </p>
+                <Link href="/contatti" className="service-link">
+                  Contattami →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -64,9 +66,9 @@ export default function Servizi() {
             display: flex;
             flex-direction: column;
             flex: 1;
+            width: 100%;
             max-width: 1800px;
             margin: 0 auto;
-            padding: 0 2rem;
           }
 
           .content-wrapper {
@@ -197,8 +199,45 @@ export default function Servizi() {
               font-size: 0.95rem;
             }
           }
+
+          @media (max-width: 440px) {
+            .servizi-container {
+              padding: 0.5rem;
+            }
+
+            .content-wrapper {
+              padding: 0.5rem;
+            }
+
+            .left-section,
+            .right-section {
+              margin: 0 0.8rem;
+              padding: 1.2rem;
+              border-radius: 12px;
+            }
+
+            .section-content h2 {
+              font-size: 1.2rem;
+              height: 1.6rem;
+              margin-bottom: 0.7rem;
+            }
+
+            .section-content p {
+              font-size: 0.9rem;
+              line-height: 1.35;
+            }
+
+            .section-content p.pricing {
+              margin-top: 0.8rem;
+            }
+
+            .service-link {
+              margin-top: 0.3rem;
+              font-size: 0.9rem;
+            }
+          }
         `}</style>
-      </div>
+      </main>
     </Layout>
   )
 } 

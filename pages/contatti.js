@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 export default function Contatti() {
   return (
     <Layout>
-      <div className="contatti-container">
+      <div className="contatti-container contatti-page">
         <div className="left-column">
           <div className="column-content">
             <h2>Recapiti</h2>
@@ -51,7 +51,7 @@ export default function Contatti() {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1.5rem;
-            height: calc(100vh - 80px);
+            height: calc(100vh - 150px);
             display: flex;
             flex-direction: row;
             gap: 4rem;
@@ -75,6 +75,10 @@ export default function Contatti() {
             padding: 0 1rem;
           }
 
+          .left-column {
+            align-items: center;
+          }
+
           .column-content {
             max-width: 600px;
             width: 100%;
@@ -86,7 +90,7 @@ export default function Contatti() {
           h1, h2 {
             font-size: 1.75rem;
             text-align: center;
-            margin-bottom: 0.4rem;
+            margin-bottom: 2rem;
             color: #333;
             width: 100%;
           }
@@ -123,14 +127,18 @@ export default function Contatti() {
           }
 
           .contact-info p {
-            margin-bottom: 0.7rem;
+            margin-bottom: 2rem;
             font-size: 1.1rem;
-            line-height: 1.3;
+            line-height: 1.8;
             color: #666;
           }
 
           .contact-info p:first-child {
-            margin-bottom: 0.9rem;
+            margin-bottom: 3rem;
+          }
+
+          .contact-info p:last-child {
+            margin-bottom: 0;
           }
 
           .contact-info a {
@@ -148,6 +156,8 @@ export default function Contatti() {
               flex-direction: column;
               padding: 1rem;
               gap: 1.5rem;
+              height: auto;
+              min-height: calc(100vh - 150px);
             }
 
             .vertical-divider {
@@ -182,11 +192,53 @@ export default function Contatti() {
             .map-container {
               width: 100%;
               max-width: 600px;
+              margin-bottom: 60px;
             }
 
             .map-container iframe {
               width: 100%;
-              height: 350px;
+              height: 300px;
+            }
+          }
+
+          @media (max-width: 440px) {
+            .contatti-container {
+              padding: 0.5rem;
+            }
+
+            .left-column, .right-column {
+              padding: 0 0.5rem;
+            }
+
+            .contact-info p {
+              font-size: 0.95rem;
+              line-height: 1.6;
+              margin-bottom: 0.35rem;
+            }
+
+            .contact-info p:first-child {
+              margin-bottom: 1.5rem;
+            }
+
+            .map-container {
+              margin-bottom: 70px;
+            }
+
+            .map-container iframe {
+              height: 250px;
+            }
+
+            h1, h2 {
+              font-size: 1.3rem;
+              margin-bottom: 1rem;
+            }
+
+            .clinic-name {
+              font-size: 1.1rem;
+            }
+
+            .street-address {
+              font-size: 0.95rem;
             }
           }
         `}</style>

@@ -1,0 +1,248 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: 
+globs: *.css, *.scss, *.js, *.ts, *.jsx, *.tsx, *.html, *.astro
+alwaysApply: true
+---
+
+Overview
+This rule provides a comprehensive framework for implementing responsive design that scales proportionally across all device sizes, from mobile phones to large desktop displays. It uses a combination of CSS variables, media queries, and JavaScript to create fluid, proportional layouts that maintain design integrity at any viewport size.
+Implementation Guide
+
+1. Define Responsive Breakpoints
+:root {
+  /* Desktop reference dimensions */
+  --reference-width: 1512px;
+  --max-reference-width: 1550px;
+  --scale-factor: 1;
+  
+  /* Mobile reference dimensions */
+  --mobile-reference-width: 375px;
+  --mobile-max-width: 440px;
+  --mobile-scale-factor: 1;
+}
+
+Key Breakpoints:
+Mobile: ≤440px (optimized for smartphones up to iPhone 16 Pro Max)
+Standard Desktop: 441px - 1550px
+Large Desktop: >1550px (triggers proportional scaling)
+
+2. Set Up Base CSS Variables
+:root {
+  /* Base sizes for desktop that will be scaled */
+  --base-padding: 2rem;
+  --base-gap: 2rem;
+  --base-title-size: 2.5rem;
+  --base-text-size: 1.1rem;
+  --base-container-width: 1400px;
+  
+  /* Mobile base sizes */
+  --mobile-padding: 1.5rem;
+  --mobile-gap: 1.5rem;
+  --mobile-title-size: 2rem;
+  --mobile-text-size: 1rem;
+}
+
+3. Create Proportional Scaling Media Queries
+/* Scaling for screens larger than reference width */
+@media screen and (min-width: 1551px) {
+  :root {
+    /* Calculate proportional scaling */
+    --scale-factor: calc(100vw / var(--max-reference-width));
+    
+    /* Apply scaling to base sizes with controlled growth */
+    --base-padding: calc(2rem * min(1.2, var(--scale-factor)));
+    --base-title-size: calc(2.5rem * min(1.35, var(--scale-factor) * 1.2));
+    --base-text-size: calc(1.1rem * min(1.35, var(--scale-factor) * 1.2));
+    --base-container-width: calc(1400px * min(1.5, var(--scale-factor) * 1.2));
+  }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 440px) {
+  :root {
+    /* Use mobile base sizes */
+    --base-padding: var(--mobile-padding);
+    --base-gap: var(--mobile-gap);
+    --base-title-size: var(--mobile-title-size);
+    --base-text-size: var(--mobile-text-size);
+  }
+  
+  /* Mobile-specific layout adjustments */
+  body {
+    overflow-y: auto; /* Enable native scrolling */
+    height: auto;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+4. Implement JavaScript Resize Handler
+// Add resize listener to apply custom scaling
+window.addEventListener('resize', adjustForScreenSize);
+window.addEventListener('orientationchange', () => {
+  setTimeout(adjustForScreenSize, 100);
+});
+
+// Run once on load
+document.addEventListener('DOMContentLoaded', adjustForScreenSize);
+
+function adjustForScreenSize() {
+  const referenceWidth = 1550;
+  const mobileReferenceWidth = 375;
+  const mobileMaxWidth = 440;
+  const currentWidth = window.innerWidth;
+  
+  // Mobile scaling (smartphones)
+  if (currentWidth <= mobileMaxWidth) {
+  // Calculate mobile scaling factor
+  const mobileScaleFactor = Math.min(1.2, currentWidth / mobileReferenceWidth);
+    
+  // Apply mobile scaling factor
+  document.documentElement.style.setProperty('--mobile-scale-factor', mobileScaleFactor.toString());
+    
+  // Scale font sizes proportionally for mobile
+    const titleSize = Math.min(2 * mobileScaleFactor, 2.5);
+    const textSize = Math.min(1 * mobileScaleFactor, 1.2);
+    
+  document.documentElement.style.setProperty('--mobile-title-size', `${titleSize}rem`);
+  document.documentElement.style.setProperty('--mobile-text-size', `${textSize}rem`);
+    
+  // Restructure DOM for mobile if needed
+  restructureForMobile();
+  } 
+  // Desktop scaling for screens larger than reference
+  else if (currentWidth > referenceWidth) {
+  // Calculate scaling factor (capped to prevent excessive scaling)
+  const scaleFactor = Math.min(1.5, currentWidth / referenceWidth);
+    
+  // Apply scaling factor
+  document.documentElement.style.setProperty('--scale-factor', scaleFactor.toString());
+    
+  // Calculate and set the container width based on the viewport
+  const containerWidth = Math.min(1400 * scaleFactor * 1.2, currentWidth * 0.9);
+  document.documentElement.style.setProperty('--base-container-width', `${containerWidth}px`);
+    
+  // Reset DOM structure for desktop if needed
+  resetToDesktop();
+  } 
+  else {
+    // Reset to default values for standard desktop screens
+    document.documentElement.style.setProperty('--scale-factor', '1');
+    document.documentElement.style.setProperty('--base-container-width', '1400px');
+    
+  // Reset DOM structure for desktop if needed
+  resetToDesktop();
+  }
+}
+
+5. DOM Restructuring Functions (Optional)
+// Function to restructure DOM for mobile layout
+function restructureForMobile() {
+  // Only restructure if not already done
+  if (document.querySelector('.mobile-restructured')) {
+    return;
+  }
+  
+  const wrapper = document.querySelector('.wrapper');
+  const container = document.querySelector('.container');
+  const content = document.querySelector('.content');
+  const title = document.querySelector('.title');
+  
+  if (wrapper && container && content && title) {
+    // Mark as restructured
+    wrapper.classList.add('mobile-restructured');
+    
+  // Move title to the top of the wrapper (outside container)
+  if (title.parentElement === content) {
+  wrapper.insertBefore(title, wrapper.firstChild.nextSibling || wrapper.firstChild);
+    }
+  }
+}
+
+// Function to reset DOM structure for desktop
+function resetToDesktop() {
+  const wrapper = document.querySelector('.wrapper');
+  const content = document.querySelector('.content');
+  const title = document.querySelector('.title');
+  
+  if (wrapper && content && title && wrapper.classList.contains('mobile-restructured')) {
+    // Remove restructured marker
+    wrapper.classList.remove('mobile-restructured');
+    
+  // Move title back to content if it's directly under wrapper
+  if (title.parentElement === wrapper) {
+  content.insertBefore(title, content.firstChild);
+    }
+  }
+}
+
+6. Container Structure
+<div class="wrapper">
+  <div class="container">
+    <div class="content">
+      <h1 class="title">Page Title</h1>
+      <div class="description">
+        <!-- Content goes here -->
+      </div>
+    </div>
+    <div class="sidebar">
+      <!-- Sidebar content -->
+    </div>
+  </div>
+</div>
+
+Best Practices
+1 - Use CSS Variables for All Dimensions
+- Define all sizes, spacings, and dimensions as CSS variables
+- Group variables by device type (desktop vs. mobile)
+- Use descriptive naming conventions (e.g., --base-title-size)
+2 - Control Growth with Min/Max Functions
+- Use min() and max() functions to prevent excessive scaling
+- Example: font-size: calc(2rem * min(1.35, var(--scale-factor) * 1.2));
+3 - Proportional Scaling Approach
+- Calculate scaling factors based on viewport width ratios
+- Apply different scaling rates to different elements (text vs. containers)
+- Use percentage-based constraints for maximum widths
+4 - Mobile-First Considerations
+- Define mobile layouts first, then scale up for desktop
+- Use flexbox or grid layouts that reflow naturally
+- Consider touch targets (minimum 44×44px) for mobile interfaces
+5 - Performance Optimization
+- Debounce resize event handlers to prevent excessive calculations
+- Use will-change property for elements that will animate during resizing
+- Minimize DOM manipulations during resize events
+6 - Testing Across Devices
+- Test on actual devices, not just browser emulators
+- Verify behavior at the exact breakpoint thresholds
+- Check both portrait and landscape orientations
+
+Implementation Workflow
+1 - Define CSS variables and breakpoints in your global stylesheet
+2 - Create container structure with appropriate class names
+3 - Add the JavaScript resize handler to your main script file
+4 - Implement optional DOM restructuring functions if needed
+5 - Test across multiple devices and viewport sizes
+6 - Fine-tune scaling factors based on visual inspection
+
+Edge Cases to Handle
+1 - Extremely Large Screens
+- Cap maximum scaling to prevent excessive growth
+- Consider fixed maximum widths for content containers
+2 - High Pixel Density Displays
+- Use viewport-relative units rather than pixel-based media queries
+- Test on devices with different pixel ratios
+3 - Text Overflow
+- Implement text truncation or wrapping for critical UI elements
+- Use text-overflow: ellipsis for elements that might overflow
+4 - Orientation Changes
+- Add specific handling for orientation changes on mobile devices
+- Use a small timeout (100ms) after orientation change before recalculating

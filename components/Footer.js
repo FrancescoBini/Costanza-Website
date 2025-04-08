@@ -98,6 +98,39 @@ export default function Footer() {
             width: 300px;
           }
         }
+
+        @media (max-width: 440px) {
+          .footer {
+            padding: 0.5rem 0;
+            height: 50px;
+          }
+
+          .footer-content {
+            height: 100%;
+            justify-content: center;
+          }
+
+          .footer-line {
+            width: 200px;
+            margin-bottom: 0.5rem;
+          }
+
+          .copyright {
+            flex-direction: row;
+            font-size: 0.75rem;
+            gap: 0.5rem;
+            white-space: nowrap;
+          }
+
+          .contact-icons {
+            margin-left: 0.5rem;
+          }
+
+          .icon-link svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
       `}</style>
     </footer>
   );
