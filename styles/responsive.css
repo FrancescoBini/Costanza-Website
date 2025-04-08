@@ -1,0 +1,93 @@
+:root {
+  /* MacBook Pro M3 14" reference dimensions */
+  --reference-width: 1512px;  /* MacBook Pro M3 14" width */
+  --max-reference-width: 1550px;
+  --scale-factor: 1;
+  
+  /* Mobile reference dimensions */
+  --mobile-reference-width: 375px;
+  --mobile-max-width: 440px;
+  --mobile-scale-factor: 1;
+
+  /* Base sizes calibrated for MacBook Pro M3 14" */
+  --base-gap: 2rem;
+  --base-title-size: 2.5rem;
+  --base-text-size: 1.1rem;
+  --base-container-width: 1400px;
+  
+  /* Mobile base sizes */
+  --mobile-gap: 1.5rem;
+  --mobile-title-size: 2rem;
+  --mobile-text-size: 1rem;
+}
+
+/* Scaling for screens larger than MacBook Pro M3 14" */
+@media screen and (min-width: 1551px) {
+  :root {
+    --scale-factor: calc(100vw / var(--max-reference-width));
+    
+    /* Apply scaling with controlled growth */
+    --base-title-size: calc(2.5rem * min(1.35, var(--scale-factor) * 1.2));
+    --base-text-size: calc(1.1rem * min(1.35, var(--scale-factor) * 1.2));
+    --base-container-width: calc(1400px * min(1.5, var(--scale-factor) * 1.2));
+  }
+}
+
+/* Mobile styles - Optimized for iPhone 14 Pro (430x932) */
+@media screen and (max-width: 440px) {
+  :root {
+    --base-gap: var(--mobile-gap);
+    --base-title-size: var(--mobile-title-size);
+    --base-text-size: var(--mobile-text-size);
+  }
+  
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Home page - Center list of pages */
+  .home-navigation {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Contatti page - Fix footer overlap */
+  .contatti-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contatti-page .map-container {
+    margin-bottom: 80px; /* Space for footer */
+  }
+
+  /* Chi sono page - Add padding to description */
+  .chi-sono-description {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+/* Tablet and small laptop styles */
+@media screen and (min-width: 441px) and (max-width: 1511px) {
+  :root {
+    --scale-factor: calc(100vw / var(--reference-width));
+    
+    /* Proportional scaling for intermediate screens */
+    --base-gap: calc(2rem * var(--scale-factor));
+    --base-title-size: calc(2.5rem * var(--scale-factor));
+    --base-text-size: calc(1.1rem * var(--scale-factor));
+    --base-container-width: calc(min(1400px, 90vw));
+  }
+} 

@@ -5,47 +5,49 @@ import Layout from '../components/Layout'
 export default function ChiSono() {
   return (
     <Layout>
-      <div className="chi-sono-container">
-        <div className="content-wrapper">
-          <div className="profile-image-container">
-            <Image
-              src="/images/profilepic.jpeg"
-              alt="Dott.ssa Costanza Nasta"
-              fill
-              sizes="(max-width: 768px) 280px, 340px"
-              className="profile-image"
-              priority
-              style={{ 
-                objectFit: 'cover',
-                transform: 'translate(-1%, 2%)',
-                scale: '1.05'
-              }}
-            />
-          </div>
-          <div className="text-content">
-            <p>
-              Nel 2022 ho conseguito la laurea triennale in Scienze della Nutrizione presso l'Università di Urbino
-              e, successivamente, ho completato la Laurea Magistrale in Alimentazione e Nutrizione
-              Umana presso l'Università di Milano. Dopo aver superato l'esame di stato nel
-              novembre 2024, sono diventata Biologa Nutrizionista e mi sono iscritta all'Ordine dei
-              Biologi (Sezione A, n. 5327) dell'Emilia-Romagna e delle Marche.
-            </p>
-            <p>
-              Continuo a perfezionare la mia preparazione, partecipando a corsi di alta formazione
-              per offrire consulenze basate su evidenze scientifiche. Il mio obiettivo è aiutarti a
-              raggiungere il benessere e migliorare le tue performance, con un approccio pratico,
-              sostenibile e, soprattutto, personalizzato.
-            </p>
-            <p>
-              Ogni persona è unica, perciò il mio lavoro è creare piani nutrizionali che si adattino
-              perfettamente al tuo stile di vita, alle tue preferenze e alle tue necessità.
-            </p>
-            <p>
-              <Link href="/contatti" className="contact-link">
-                <strong>Contattami</strong>
-              </Link> per creare insieme un piano nutrizionale che si adatti alle tue
-              esigenze.
-            </p>
+      <main>
+        <div className="chi-sono-container">
+          <div className="content-wrapper">
+            <div className="profile-image-container">
+              <Image
+                src="/images/profilepic.jpeg"
+                alt="Dott.ssa Costanza Nasta"
+                fill
+                sizes="(max-width: 768px) 280px, 340px"
+                className="profile-image"
+                priority
+                style={{ 
+                  objectFit: 'cover',
+                  transform: 'translate(-1%, 2%)',
+                  scale: '1.05'
+                }}
+              />
+            </div>
+            <div className="text-content chi-sono-description">
+              <p>
+                Nel 2022 ho conseguito la laurea triennale in Scienze della Nutrizione presso l'Università di Urbino
+                e, successivamente, ho completato la Laurea Magistrale in Alimentazione e Nutrizione
+                Umana presso l'Università di Milano. Dopo aver superato l'esame di stato nel
+                novembre 2024, sono diventata Biologa Nutrizionista e mi sono iscritta all'Ordine dei
+                Biologi (Sezione A, n. 5327) dell'Emilia-Romagna e delle Marche.
+              </p>
+              <p>
+                Continuo a perfezionare la mia preparazione, partecipando a corsi di alta formazione
+                per offrire consulenze basate su evidenze scientifiche. Il mio obiettivo è aiutarti a
+                raggiungere il benessere e migliorare le tue performance, con un approccio pratico,
+                sostenibile e, soprattutto, personalizzato.
+              </p>
+              <p>
+                Ogni persona è unica, perciò il mio lavoro è creare piani nutrizionali che si adattino
+                perfettamente al tuo stile di vita, alle tue preferenze e alle tue necessità.
+              </p>
+              <p>
+                <Link href="/contatti" className="contact-link">
+                  <strong>Contattami</strong>
+                </Link> per creare insieme un piano nutrizionale che si adatti alle tue
+                esigenze.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -54,7 +56,7 @@ export default function ChiSono() {
             display: flex;
             flex-direction: column;
             flex: 1;
-            padding: 0 2rem;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
           }
@@ -63,8 +65,8 @@ export default function ChiSono() {
             display: flex;
             gap: 3.2rem;
             align-items: center;
-            height: calc(100vh - 140px);
-            padding: 0;
+            padding: 2rem 0;
+            min-height: fit-content;
           }
 
           .profile-image-container {
@@ -128,24 +130,64 @@ export default function ChiSono() {
             .content-wrapper {
               flex-direction: column;
               gap: 1rem;
-              height: calc(100vh - 120px);
-              justify-content: center;
+              height: auto;
+              justify-content: flex-start;
+              padding: 1rem;
             }
 
             .profile-image-container {
-              width: 240px;
-              height: 240px;
+              width: 200px;
+              height: 200px;
+              margin: 0.5rem 0;
             }
 
             .text-content {
               text-align: center;
-              font-size: 0.95rem;
-              max-height: calc(100vh - 400px);
-              padding-right: 0.5rem;
+              font-size: 0.9rem;
+              line-height: 1.4;
+              max-height: none;
+              padding: 0 1rem;
+              margin: 0;
+              overflow: visible;
+            }
+
+            .text-content p {
+              margin-bottom: 1rem;
+            }
+          }
+
+          @media (max-width: 440px) {
+            .chi-sono-container {
+              overflow-x: hidden;
+              width: 100%;
+              margin: 0;
+              padding: 0;
+            }
+
+            .content-wrapper {
+              padding: 0.5rem;
+              margin: 0;
+              width: 100%;
+            }
+
+            .profile-image-container {
+              width: 180px;
+              height: 180px;
+              margin: 0.5rem auto;
+            }
+
+            .text-content {
+              padding: 0 1.2rem;
+              font-size: 0.85rem;
+              line-height: 1.35;
+            }
+
+            .text-content p {
+              margin-bottom: 0.8rem;
             }
           }
         `}</style>
-      </div>
+      </main>
     </Layout>
   )
 }

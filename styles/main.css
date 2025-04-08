@@ -1,3 +1,5 @@
+@import './responsive.css';
+
 @font-face {
   font-family: 'Inter var';
   font-style: normal;
@@ -24,7 +26,11 @@ body {
   font-variation-settings: 'wght' 450;
   font-variant: common-ligatures contextual;
   letter-spacing: -0.02em;
+  font-size: var(--base-text-size);
+  margin: 0;
+  padding: 0;
 }
+
 b,
 strong,
 h3,
@@ -33,11 +39,15 @@ h5,
 h6 {
   font-variation-settings: 'wght' 650;
 }
+
 h1 {
   font-variation-settings: 'wght' 850;
+  font-size: var(--base-title-size);
 }
+
 h2 {
   font-variation-settings: 'wght' 750;
+  font-size: calc(var(--base-title-size) * 0.85);
 }
 
 @media screen and (min-device-pixel-ratio: 1.5),
@@ -54,6 +64,8 @@ details summary {
 
 img.next-image {
   margin: 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .prose a {
@@ -62,4 +74,10 @@ img.next-image {
 
 .nav-line .nav-link {
   color: #69778c;
+}
+
+.container {
+  max-width: var(--base-container-width);
+  margin: 0 auto;
+  gap: var(--base-gap);
 }

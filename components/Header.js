@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Header() {
   const router = useRouter();
@@ -8,6 +9,15 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-content">
+        <div className="logo-container">
+          <Image
+            src="/images/transparent_1744017677_1781.svg"
+            alt="Logo"
+            width={240}
+            height={240}
+            priority
+          />
+        </div>
         <nav className="nav-links">
           <Link href="/" className={router.pathname === "/" ? "active" : ""}>
             Home
@@ -31,6 +41,8 @@ export default function Header() {
           flex-direction: column;
           align-items: center;
           padding: 1rem 0;
+          position: relative;
+          width: 100%;
         }
 
         .header-content {
@@ -38,6 +50,13 @@ export default function Header() {
           flex-direction: column;
           align-items: center;
           width: 100%;
+          position: relative;
+        }
+
+        .logo-container {
+          position: absolute;
+          left: 2rem;
+          top: -0.5rem;
         }
 
         .nav-links {
@@ -77,6 +96,13 @@ export default function Header() {
 
           .header-line {
             width: 300px;
+          }
+
+          .logo-container {
+            position: relative;
+            left: 0;
+            top: 0;
+            margin-bottom: 1rem;
           }
         }
       `}</style>
